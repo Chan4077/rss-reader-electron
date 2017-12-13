@@ -1,0 +1,284 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import 'assets/md-font/material-icons.css';
+@import '~highlight.js/styles/solarized-light.css';
+
+/* Select Angular Material theming. */
+
+@include mat-core();
+
+@mixin rss-reader-theme($theme) {
+	@include tables-theme($theme);
+	$foreground: map-get($theme, foreground);
+	$primary: map-get($theme, primary);
+	$accent: map-get($theme, accent);
+	$warn: map-get($theme, warn);
+
+	.active-link {
+		color: mat-color($primary) !important;
+		background-color: map-get($foreground, divider) !important;
+	}
+	.warning-icon {
+		color: mat-color($warn) !important;
+	}
+	.build-icon {
+		color: mat-color($accent) !important;
+	}
+	.docs-a {
+		color: mat-color($primary) !important;
+	}
+	mat-sidenav-content::-webkit-scrollbar-thumb {
+		background-color: mat-color($accent);
+		&:hover {
+			background-color: mat-color($accent, A400);
+		}
+	}
+	mat-sidenav-content::-webkit-scrollbar {
+		background-color: mat-color($foreground, text);
+		border: 1px solid mat-color($foreground, text);
+	}
+}
+// Mixin from material docs site
+@mixin tables-theme($theme) {
+	$primary: map-get($theme, primary);
+	$accent: map-get($theme, accent);
+	$warn: map-get($theme, warn);
+	$background: map-get($theme, background);
+	$foreground: map-get($theme, foreground);
+	$is-dark-theme: map-get($theme, is-dark);
+	$tableBorderOpacity: if($is-dark-theme, 0.08, 0.03);
+	
+	table {
+	  color: mat-color($foreground, text);
+	}
+  
+	th {
+	  background: mat-color($background, app-bar);
+	}
+  
+	td {
+	  border: 1px solid rgba(mat-color($foreground, secondary-text), $tableBorderOpacity);
+	}
+  }
+$deeppurple-amber-primary: mat-palette($mat-deep-purple);
+$deeppurple-amber-accent: mat-palette($mat-amber, A200, A100, A400);
+$deeppurple-amber-theme: mat-light-theme($deeppurple-amber-primary, $deeppurple-amber-accent);
+
+$pink-bluegrey-primary: mat-palette($mat-pink);
+$pink-bluegrey-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+$pink-bluegrey-theme: mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-accent);
+
+$purple-green-primary: mat-palette($mat-purple);
+$purple-green-accent: mat-palette($mat-green, A200, A100, A400);
+$purple-green-theme: mat-dark-theme($purple-green-primary, $purple-green-accent);
+
+$indigo-pink-primary: mat-palette($mat-indigo);
+$indigo-pink-accent: mat-palette($mat-pink, A200, A100, A400);
+$indigo-pink-theme: mat-light-theme($indigo-pink-primary, $indigo-pink-accent);
+.deeppurple-amber {
+	@include angular-material-theme($deeppurple-amber-theme);
+	@include rss-reader-theme($deeppurple-amber-theme);
+}
+
+.pink-bluegrey {
+	@include angular-material-theme($pink-bluegrey-theme);
+	@include rss-reader-theme($pink-bluegrey-theme);
+}
+
+.purple-green {
+	@include angular-material-theme($purple-green-theme);
+	@include rss-reader-theme($purple-green-theme);
+}
+
+.indigo-pink {
+	@include angular-material-theme($indigo-pink-theme);
+	@include rss-reader-theme($indigo-pink-theme);
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-simple-snackbar-action {
+    text-transform: uppercase;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+pre.hljs,
+code.hljs {
+    white-space: pre-wrap;
+}
+
+.refreshing>div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    justify-content: center;
+}
+
+
+/* Extracted from market2 */
+
+mat-spinner.start-indicator svg,
+mat-spinner.start-indicator {
+    width: 22px !important;
+    height: 22px !important;
+}
+
+.start, .center {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.checkbox {
+    margin: 6px;
+}
+
+.custom-snackbar {
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+}
+
+.custom-snackbar-action {
+    flex-shrink: 0;
+    margin-left: 48px;
+}
+
+.app-sidenav {
+	width: 240px;
+	@include mat-elevation(3);
+}
+
+.selection-dialog>mat-dialog-container>selection-dialog>mat-dialog-content {
+    padding: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+.warning-icon, .build-icon {
+	font-size: 72px;
+	width: 72px !important;
+	height: 72px !important;
+}
+.page-not-found-container {
+    padding: 4px;
+}
+
+.app-content {
+	margin: 2.5%;
+}
+// Excerpt from snackbar demo on material2's demoapp
+.party {
+    animation: party 5000ms infinite;
+}
+
+@keyframes party {
+    0% {
+        background-color: #00f;
+    }
+    10% {
+        background-color: #8e44ad;
+    }
+    20% {
+        background-color: #1abc9c;
+    }
+    30% {
+        background-color: #d35400;
+    }
+    40% {
+        background-color: #00f;
+    }
+    50% {
+        background-color: #34495e;
+    }
+    60% {
+        background-color: #00f;
+    }
+    70% {
+        background-color: #2980b9;
+    }
+    80% {
+        background-color: #f1c40f;
+    }
+    90% {
+        background-color: #2980b9;
+    }
+    100% {
+        background-color: #0ff;
+    }
+}
+
+.red {
+    background-color: red !important;
+}
+
+// Styles for table
+table {
+	border-collapse: collapse;
+	border-radius: 2px;
+	border-spacing: 0;
+	margin: 0 0 32px 0;
+	width: 100%;
+	box-shadow: 0 2px 2px rgba(0,0,0,.24),0 0 2px rgba(0,0,0,.12);
+}
+
+th {
+	font-weight: 400;
+	max-width: 100px;
+	padding: 13px 32px;
+	text-align: left
+}
+
+td {
+	font-weight: 400;
+	padding: 8px 16px
+}
+
+/* Styles adapted from angular.io */
+
+mat-sidenav-content::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	box-shadow: inset 0px 2px 1px -1px rgba(0, 0, 0, 0.2), inset 0px 1px 1px 0px rgba(0, 0, 0, 0.14), inset 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	&:hover {
+		background-color: #ffab00;
+	}
+}
+mat-sidenav-content::-webkit-scrollbar {
+    height: 10px;
+	width: 10px;
+}
+
+.post-dialog .mat-dialog-container {
+	position: absolute;
+	top: 18px;
+	bottom: 0px;
+	width: 100%;
+}
+.post-dialog {
+	position: relative;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+/* End styles */

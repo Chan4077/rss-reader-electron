@@ -1,0 +1,40 @@
+<h2 matDialogTitle>RSS Url</h2>
+<mat-dialog-content fxLayout="column">
+	<form #formCtrl="ngForm" fxLayout="column">
+		<p>Select from a built-in choice of options:</p>
+		<mat-form-field>
+			<mat-select [(ngModel)]="feedUrl" placeholder="Select RSS feed" name="feedUrl">
+				<mat-optgroup [label]="feed.name" *ngFor="let feed of feeds">
+					<mat-option *ngFor="let channel of feed.channels" [value]="channel.feedUrl">
+						{{channel.name}}
+					</mat-option>
+				</mat-optgroup>
+			</mat-select>
+		</mat-form-field>
+		<p>Or enter a RSS feed url not listed above here:</p>
+		<mat-form-field>
+			<input matInput placeholder="RSS Url" [(ngModel)]="feedUrl" name="feedUrl">
+		</mat-form-field>
+		<mat-checkbox [(ngModel)]="publishFeedUrl" name="publishFeedUrl">Publish Feed URL</mat-checkbox>
+		<mat-form-field *ngIf="publishFeedUrl">
+			<input matInput placeholder="RSS Channel" [(ngModel)]="feedUrlChannel" name="feedUrlChannel">
+		</mat-form-field>
+		<mat-form-field *ngIf="publishFeedUrl">
+			<mat-select [(ngModel)]="feedCategory" name="feedCategory" placeholder="Feed category">
+				<mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<p>This is required. For more information on how to get an api key, go
+			<a href="https://github.com/Chan4077/rss-reader/blob/master/docs/guides/GENERATE_API_KEY.md" target="_blank">here</a>
+		</p>
+		<mat-form-field>
+			<input type="text" matInput placeholder="API Key" [(ngModel)]="apiKey" required name="apiKey">
+			<mat-error>This is required</mat-error>
+			<a mat-icon-button matSuffix routerLink="/doc/guides/generate-api-key" matTooltip="How to generate a key" target="_blank"><mat-icon>help</mat-icon></a>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button color="primary" matDialogClose="cancel">Cancel</button>
+	<button mat-button color="primary" matDialogClose="save" [disabled]="!formCtrl.valid">Save</button>
+</mat-dialog-actions>
